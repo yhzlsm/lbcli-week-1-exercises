@@ -1,0 +1,67 @@
+name: Run Setup Script
+
+on:
+  push:
+    branches:
+      - main  # Trigger on pushes to the main branch
+
+jobs:
+  bitcoin-setup:
+    runs-on: ubuntu-latest  # Use the latest Ubuntu environment
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4  # Check out the repository code
+
+      - name: Cache Bitcoin Core
+        id: cache-bitcoin
+        uses: actions/cache@v3
+        with:
+          path: |
+            bitcoin-28.0
+            bitcoin-28.0-x86_64-linux-gnu.tar.gz
+          key: bitcoin-core-28.0
+          
+      - name: Setup Bitcoin Core
+        run: |
+          if [ "${{ steps.cache-bitcoin.outputs.cache-hit }}" != 'true' ]; then
+            wget https://bitcoincore.org/bin/bitcoin-core-28.0/bitcoin-28.0-x86_64-linux-gnu.tar.gz
+            tar -xzvf bitcoin-28.0-x86_64-linux-gnu.tar.gz
+          fi
+          sudo bash .github/setup.sh
+
+      - name: Start bitcoind in regtest mode
+        run: |
+          bitcoind -regtest -daemon
+          echo "Waiting for bitcoind to be ready..."
+
+          # Wait for bitcoind to start (max 30s)
+          for i in {1..30}; do
+            if bitcoin-cli -regtest getblockchaininfo > /dev/null 2>&1; then
+              echo "✅ bitcoind is ready!"
+              break
+            fi
+            echo "Still waiting for bitcoind..."
+            sleep 1
+          done
+
+      - name: Run Capstone Exercise
+        run: |
+          chmod +x submission/test.sh
+          
+          # Install bc for floating point calculations
+          sudo apt-get update && sudo apt-get install -y bc
+          
+          echo "Running the Bitcoin treasure hunt capstone exercise..."
+          if submission/test.sh > treasure_hunt_output.log 2>&1; then
+            echo "✅ Capstone exercise completed successfully!"
+            # Print the last 10 lines to see the summary
+            echo "--- Treasure Hunt Summary ---"
+            tail -n 10 treasure_hunt_output.log
+            echo "---------------------------"
+          else
+            echo "❌ Capstone exercise failed with exit code $?"
+            cat treasure_hunt_output.log
+            exit 1
+          fi
+            
