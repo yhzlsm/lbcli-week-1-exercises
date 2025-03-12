@@ -5,9 +5,9 @@
 Exercise should be done using Regtest network.
 
 1. Fork this repository.
-2. Click on `Actions` tab and enable github action for your repository.
+2. Go to the `Actions` tab and enable github workflow for your repository by clicking `I understand my ...`
 
-<img src="https://github.com/btrust-builders/lbcli-week-1-exercises/blob/main/enable-github-actions.png" width="200" />
+<img src="https://github.com/btrust-builders/lbcli-week-1-exercises/blob/main/enable-github-actions.png" width="500" />
 
 3. Clone the fork to your local computer.
 4. Add your bitcoin cli commands to the script files in the submission folder. Example:
@@ -18,7 +18,7 @@ Exercise should be done using Regtest network.
 
 6. Confirm your forked repository has a green check mark.
 
-<img src="https://github.com/btrust-builders/lbcli-week-1-exercises/blob/main/success.png" width="200" />
+<img src="https://github.com/btrust-builders/lbcli-week-1-exercises/blob/main/success.png" width="300" />
 
 7. Submit your solution to this form: [Google form](https://forms.gle/eDRGAJXpLqRxEExR6).
 
