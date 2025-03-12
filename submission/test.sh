@@ -3,13 +3,11 @@
 # Import helper functions
 source submission/functions.sh
 
-# Capstone Exercise: Bitcoin Address Generation and Transaction Verification
+# Week One Exercise: Bitcoin Address Generation and Transaction Verification
 # This script demonstrates using the key concepts from previous exercises in a practical scenario
 
 # Ensure script fails fast on errors
 set -e
-
-
 
 # ========================================================================
 # STUDENT EXERCISE PART BEGINS HERE - Complete the following sections
