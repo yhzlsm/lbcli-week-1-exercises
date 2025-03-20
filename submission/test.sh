@@ -182,12 +182,12 @@ INTERNAL_KEY=$(trim "$INTERNAL_KEY")
 # STUDENT TASK: Create a proper descriptor with just the key
 # WRITE YOUR SOLUTION BELOW:
 echo "Using internal key: $INTERNAL_KEY"
-SIMPLE_DESCRIPTOR=$(tr($INTERNAL_KEY))
+SIMPLE_DESCRIPTOR="tr($INTERNAL_KEY)"
 echo "Simple descriptor: $SIMPLE_DESCRIPTOR"
 
 # STUDENT TASK: Get a proper descriptor with checksum
 # WRITE YOUR SOLUTION BELOW:
-TAPROOT_DESCRIPTOR=$(bitcoin-cli -regtes getdescriptorinfo "$SIMPLE_DESCRIPTOR" | jq -r '.descriptor')
+TAPROOT_DESCRIPTOR=$(bitcoin-cli -regtest getdescriptorinfo "$SIMPLE_DESCRIPTOR" | jq -r '.descriptor')
 check_cmd "Descriptor generation"
 TAPROOT_DESCRIPTOR=$(trim "$TAPROOT_DESCRIPTOR")
 echo "Taproot treasure map: $TAPROOT_DESCRIPTOR"
