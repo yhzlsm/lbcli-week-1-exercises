@@ -101,7 +101,7 @@ NEW_BALANCE=$(bitcoin-cli -regtest -rpcwallet=treasurewallet getbalance)
 check_cmd "New balance check"
 echo "Your treasure balance: $NEW_BALANCE BTC"
 
-COLLECTED=$(echo "$(bitcoin-cli -regtest -rpcwallet=btrustwallet getbalance) - $NEW_BALANCE" | bc)
+COLLECTED=$(echo "$(bitcoin-cli -regtest -rpcwallet=btrustwallet getbalance) + $NEW_BALANCE" | bc)
 check_cmd "Balance calculation"
 echo "You've collected $COLLECTED BTC in treasures!"
 
@@ -112,7 +112,7 @@ echo "--------------------------------------------"
 echo "To ensure the P2SH vault is secure, verify it's a valid Bitcoin address"
 # STUDENT TASK: Validate the P2SH address
 # WRITE YOUR SOLUTION BELOW:
-P2SH_VALID=$(bitcoin-cli -regtest validateaddress $P2SH_ADDR)
+P2SH_VALID=$(bitcoin-cli -regtest validateaddress $P2SH_ADDR | jq -r '.isvalid')
 check_cmd "Address validation"
 echo "P2SH vault validation: $P2SH_VALID"
 
