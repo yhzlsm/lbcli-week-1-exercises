@@ -167,6 +167,7 @@ echo "Create a descriptor for your taproot address and derive the address to ens
 NEW_TAPROOT_ADDR=$(bitcoin-cli -regtest -rpcwallet=treasurewallet getnewaddress "" bech32m)
 check_cmd "New taproot address generation"
 NEW_TAPROOT_ADDR=$(trim "$NEW_TAPROOT_ADDR")
+
 # STUDENT TASK: Get the address info to extract the internal key
 # WRITE YOUR SOLUTION BELOW:
 ADDR_INFO=$(bitcoin-cli -regtest -rpcwallet=treasurewallet getaddressinfo "$NEW_TAPROOT_ADDR")
@@ -174,7 +175,7 @@ check_cmd "Getting address info"
 
 # STUDENT TASK: Extract the internal key (the x-only pubkey) from the descriptor
 # WRITE YOUR SOLUTION BELOW:
-INTERNAL_KEY=$(echo "$ADDR_INFO" | jq -r '.desc | split("]")[-1] | split("#")[0]')
+INTERNAL_KEY=$(echo "$ADDR_INFO" | jq -r '.desc | split("]")[-1] | split(")")[0] | split("#")[0]')
 INTERNAL_KEY=$(trim "$INTERNAL_KEY")
 
 # STUDENT TASK: Create a proper descriptor with just the key
