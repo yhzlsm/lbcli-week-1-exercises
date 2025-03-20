@@ -59,16 +59,16 @@ echo "The treasure hunt requires 4 different types of addresses to collect funds
 echo "Generate one of each address type (legacy, p2sh-segwit, bech32, bech32m)"
 # STUDENT TASK: Generate addresses of each type
 # WRITE YOUR SOLUTION BELOW:
-LEGACY_ADDR=$(bitcoin-cli -regtest -rpcwallet=treasurewallet getnewaddress "" legacy)
+LEGACY_ADDR=$(bitcoin-cli -regtest -rpcwallet=btrustwallet getnewaddress "" legacy)
 check_cmd "Legacy address generation"
 
-P2SH_ADDR=$(bitcoin-cli -regtest -rpcwallet=treasurewallet getnewaddress "" p2sh-segwit)
+P2SH_ADDR=$(bitcoin-cli -regtest -rpcwallet=btrustwallet getnewaddress "" p2sh-segwit)
 check_cmd "P2SH address generation"
 
-SEGWIT_ADDR=$(bitcoin-cli -regtest -rpcwallet=treasurewallet getnewaddress "" bech32)
+SEGWIT_ADDR=$(bitcoin-cli -regtest -rpcwallet=btrustwallet getnewaddress "" bech32)
 check_cmd "SegWit address generation"
 
-TAPROOT_ADDR=$(bitcoin-cli -regtest -rpcwallet=treasurewallet getnewaddress "" bech32m)
+TAPROOT_ADDR=$(bitcoin-cli -regtest -rpcwallet=btrustwallet getnewaddress "" bech32m)
 check_cmd "Taproot address generation"
 
 echo "Your exploration addresses:"
