@@ -170,7 +170,7 @@ NEW_TAPROOT_ADDR=$(trim "$NEW_TAPROOT_ADDR")
 
 # STUDENT TASK: Get the address info to extract the internal key
 # WRITE YOUR SOLUTION BELOW:
-ADDR_INFO=$(bitcoin-cli -regtest -rpcwallet=$NEW_TAPROOT_ADDR getaddressinfo "$NEW_TAPROOT_ADDR")
+ADDR_INFO=$(bitcoin-cli -regtest -rpcwallet=treasurewallet getaddressinfo "$NEW_TAPROOT_ADDR")
 check_cmd "Getting address info"
 
 # STUDENT TASK: Extract the internal key (the x-only pubkey) from the descriptor
